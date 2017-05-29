@@ -32,7 +32,9 @@ class AccountBankStatementImport(models.TransientModel):
             return False
         if not unicodecsv:
             return False
-        try:
+        try:            
+            if not data_file.name.enswith('.csv'):
+                return False
             csv = unicodecsv.DictReader(data_file, delimiter=',', quotechar='"',
                                          encoding='utf-8')
         except Exception as e:
